@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import Maze from './Maze';
+import { createSlice } from '@reduxjs/toolkit';
 
 function findNeighbors(r, c, grid) {
   const neighbors = [];
@@ -79,7 +78,7 @@ function backtrackingMazeGenerator() {
   return grid;
 }
 
-function getInitialState() {
+function getMazeState() {
   const generatedMaze = backtrackingMazeGenerator();
   const mazeResultsBinary = [];
   for (let row = 0; row < generatedMaze.length; row++) {
@@ -90,29 +89,25 @@ function getInitialState() {
     else return 'white';
   });
 
-  return {
-    maze: mazeResults,
-  };
+  return mazeResults; //array with colors
 }
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = getInitialState();
-  }
+const initialState = {
+  pacManIndex: 18,
+  pacManDirection: 'right',
+  maze: getMazeState(),
+};
 
-  render() {
-    const { maze } = this.state;
+const gameSlice = createSlice({
+  name: 'game',
+  initialState: initialState,
+  reducers: {
+    RESET_MAZE: (state, action) => {
+      const newMaze = getMazeState();
+      state.maze = newMaze;
+    },
+  },
+});
 
-    return (
-      <div>
-        <Maze maze={maze} />
-        <button onClick={() => this.setState(getInitialState())}>
-          click me
-        </button>
-      </div>
-    );
-  }
-}
-
-export default App;
+export const { RESET_MAZE } = gameSlice.actions;
+export default gameSlice.reducer;
