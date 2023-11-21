@@ -11,20 +11,22 @@ function findNeighbors(r, c, grid) {
   if (r > 1 && grid[r - 2][c]) {
     neighbors.push([r - 2, c]);
   }
-  if (r < 9 && grid[r + 2][c]) {
+  if (r < 15 && grid[r + 2][c]) {
     neighbors.push([r + 2, c]);
   }
   if (c > 1 && grid[r][c - 2]) {
     neighbors.push([r, c - 2]);
   }
-  if (c < 9 && grid[r][c + 2]) {
+  if (c < 15 && grid[r][c + 2]) {
     neighbors.push([r, c + 2]);
   }
   return neighbors;
 }
 
 //h = w = 5 * 60px
-//H = W = 11 * 60px
+//H = W = ((2x5)+1) * 60px
+//h = w= 8*40px
+//H=W= 17 * 40px
 // - is 1 (wall)
 //grid=[
 //[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -43,10 +45,10 @@ function findNeighbors(r, c, grid) {
 function backtrackingMazeGenerator() {
   const grid = [];
   const row = [];
-  for (let columns = 0; columns < 11; columns++) {
+  for (let columns = 0; columns < 17; columns++) {
     row.push(1);
   }
-  for (let rows = 0; rows < 11; rows++) {
+  for (let rows = 0; rows < 17; rows++) {
     grid.push([...row]);
   }
 
@@ -67,8 +69,10 @@ function backtrackingMazeGenerator() {
       let randomIndex = Math.floor(Math.random() * neighbors.length);
       let neighborRow = neighbors[randomIndex][0];
       let neighborColumn = neighbors[randomIndex][1];
+
       //pick a random neighboring cell and set to 0 in grid
       grid[neighborRow][neighborColumn] = 0;
+
       //clear wall in between neighboring cell and current cell
       grid[Math.floor(neighborRow + currentRow) / 2][
         Math.floor(neighborColumn + currentColumn) / 2
@@ -81,7 +85,6 @@ function backtrackingMazeGenerator() {
 }
 
 function getInitialState() {
-  const arrayColors = ['white', 'black'];
   const generatedMaze = backtrackingMazeGenerator();
   const mazeResultsBinary = [];
   for (let row = 0; row < generatedMaze.length; row++) {
