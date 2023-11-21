@@ -1,3 +1,23 @@
 body {
   background: wheat;
 }
+
+.maze-container {
+  height: 600px;
+  width: 600px;
+  display: flex;
+  flex-wrap: wrap;
+  border: solid black;
+}
+
+.black {
+  height: 60px;
+  width: 60px;
+  background: black;
+}
+
+.white {
+  height: 60px;
+  width: 60px;
+  background: aliceblue;
+}
