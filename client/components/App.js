@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import Maze from './Maze';
 
-//r(integer): row of cell of interest
-//c(integer): column of cell of interest
-//grid: 2D maze grid
-//looking for neighbors that are walls
-//return list of all neighboring cells that match our request
 function findNeighbors(r, c, grid) {
   const neighbors = [];
   if (r > 1 && grid[r - 2][c]) {
@@ -27,8 +22,8 @@ function findNeighbors(r, c, grid) {
 //H = W = ((2x5)+1) * 60px
 //h = w= 8*40px
 //H=W= 17 * 40px
-// - is 1 (wall)
-//grid=[
+//1 - wall, 0 - path
+// in 11 by 11 example grid=[
 //[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 //[1, 0, 1, n, 1, 1, 1, 1, 1, 1, 1],
 //[1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -94,6 +89,7 @@ function getInitialState() {
     if (number === 1) return 'black';
     else return 'white';
   });
+
   return {
     maze: mazeResults,
   };
@@ -111,7 +107,9 @@ class App extends Component {
     return (
       <div>
         <Maze maze={maze} />
-        <button>click me</button>
+        <button onClick={() => this.setState(getInitialState())}>
+          click me
+        </button>
       </div>
     );
   }

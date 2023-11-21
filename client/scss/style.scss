@@ -1,6 +1,8 @@
 body {
   background: white;
   color: black;
+  display: flex;
+  justify-content: center;
 }
 
 .maze-container {
@@ -20,5 +22,10 @@ body {
 .white {
   height: 40px;
   width: 40px;
-  background: aliceblue;
+  background: white;
+}
+
+img {
+  height: 40px;
+  width: 40px;
 }
