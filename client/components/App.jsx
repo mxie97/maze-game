@@ -19,6 +19,7 @@ const App = () => {
     const ghostTimer = setTimeout(() => {
       dispatch(GHOST_ROAM());
     }, 500);
+    return () => clearTimeout(ghostTimer);
   });
 
   const ghostIndex = useSelector((store) => store.game.ghostIndex);

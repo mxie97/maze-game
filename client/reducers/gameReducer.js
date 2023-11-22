@@ -98,6 +98,7 @@ const initialState = {
   maze: getMazeState(),
   cherryIndex: 256,
   ghostIndex: 270,
+  ghostDirection: 'left',
 };
 
 const gameSlice = createSlice({
@@ -142,7 +143,41 @@ const gameSlice = createSlice({
       }
     },
     GHOST_ROAM: (state, action) => {
-      state.ghostIndex--;
+      let direction = ['up', 'down', 'left', 'right'];
+      let pickDirection = state.ghostDirection;
+      let moved = false;
+
+      while (!moved) {
+        if (
+          pickDirection === 'up' &&
+          state.maze[state.ghostIndex - 17] === 'white'
+        ) {
+          state.ghostIndex -= 17;
+          state.ghostDirection = 'up';
+          moved = true;
+        } else if (
+          pickDirection === 'down' &&
+          state.maze[state.ghostIndex + 17] === 'white'
+        ) {
+          state.ghostIndex += 17;
+          state.ghostDirection = 'down';
+          moved = true;
+        } else if (
+          pickDirection === 'left' &&
+          state.maze[state.ghostIndex - 1] === 'white'
+        ) {
+          state.ghostIndex--;
+          state.ghostDirection = 'left';
+          moved = true;
+        } else if (
+          pickDirection === 'right' &&
+          state.maze[state.ghostIndex + 1] === 'white'
+        ) {
+          state.ghostIndex++;
+          state.ghostDirection = 'right';
+          moved = true;
+        } else pickDirection = direction[Math.floor(Math.random() * 4)];
+      }
     },
   },
 });

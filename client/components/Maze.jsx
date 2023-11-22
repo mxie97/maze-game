@@ -6,7 +6,9 @@ import pacmanLeft from '../images/pacman-left.gif';
 import cherry from '../images/cherry.png';
 import Ghost from './Ghost.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { GHOST_ROAM, RESET_MAZE } from '../reducers/gameReducer.js';
+import { RESET_MAZE } from '../reducers/gameReducer.js';
+
+//••••
 
 const Maze = (props) => {
   const maze = useSelector((store) => store.game.maze);
