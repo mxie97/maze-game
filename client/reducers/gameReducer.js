@@ -199,9 +199,18 @@ const gameSlice = createSlice({
       state.foodIndices = foodIndicesCopy;
       state.score += 100;
     },
+    END_GAME: (state, action) => {
+      document.getElementById('modal').classList.add('active');
+      document.getElementById('overlay').classList.add('active');
+    },
   },
 });
 
-export const { RESET_MAZE, CHANGE_DIRECTION_AND_MOVE, GHOST_ROAM, EAT_FOOD } =
-  gameSlice.actions;
+export const {
+  RESET_MAZE,
+  CHANGE_DIRECTION_AND_MOVE,
+  GHOST_ROAM,
+  EAT_FOOD,
+  END_GAME,
+} = gameSlice.actions;
 export default gameSlice.reducer;

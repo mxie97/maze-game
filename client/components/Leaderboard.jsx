@@ -11,7 +11,7 @@ const Leaderboard = () => {
         className='modal'
         id='modal'
       >
-        <h4 id='endgame-message'>test</h4>
+        <h4 id='endgame-message'>GAME OVER!</h4>
         <button
           className='button'
           id='restart-button'
