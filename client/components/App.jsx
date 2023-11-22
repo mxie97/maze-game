@@ -31,16 +31,7 @@ const App = () => {
         <Maze ghostIndex={ghostIndex} />
         <ScoreBox />
       </div>
-
       <Leaderboard />
-      <button
-        onClick={() => {
-          document.getElementById('modal').classList.add('active');
-          document.getElementById('overlay').classList.add('active');
-        }}
-      >
-        click me
-      </button>
     </div>
   );
 };

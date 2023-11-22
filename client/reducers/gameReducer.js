@@ -104,6 +104,7 @@ const initialState = {
     190, 200, 210, 220, 230, 240, 250, 260,
   ],
   score: 0,
+  highScores: { testuser: 1000 },
 };
 
 const gameSlice = createSlice({
@@ -200,6 +201,7 @@ const gameSlice = createSlice({
       state.score += 100;
     },
     END_GAME: (state, action) => {
+      document.getElementById('modal2').classList.add('active');
       document.getElementById('modal').classList.add('active');
       document.getElementById('overlay').classList.add('active');
     },
