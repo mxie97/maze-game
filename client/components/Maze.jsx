@@ -6,7 +6,7 @@ import pacmanLeft from '../images/pacman-left.gif';
 import cherry from '../images/cherry.png';
 import Ghost from './Ghost.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { RESET_MAZE } from '../reducers/gameReducer.js';
+import { RESET_MAZE, EAT_FOOD } from '../reducers/gameReducer.js';
 
 //••••
 
@@ -16,10 +16,14 @@ const Maze = (props) => {
   const pacManDirection = useSelector((store) => store.game.pacManDirection);
   const cherryIndex = useSelector((store) => store.game.cherryIndex);
   const ghostIndex = props.ghostIndex;
+  const foodIndices = useSelector((store) => store.game.foodIndices);
 
   const dispatch = useDispatch();
   if (pacManIndex === cherryIndex) {
     dispatch(RESET_MAZE());
+  }
+  if (foodIndices.includes(pacManIndex)) {
+    dispatch(EAT_FOOD(pacManIndex));
   }
 
   const cells = maze.map((color, index) => {
@@ -83,6 +87,16 @@ const Maze = (props) => {
           id={index}
         >
           <Ghost />
+        </div>
+      );
+    } else if (foodIndices.includes(index)) {
+      return (
+        <div
+          className={color}
+          key={index}
+          id={index}
+        >
+          •
         </div>
       );
     } else

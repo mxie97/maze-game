@@ -1,5 +1,6 @@
 import React from 'react';
 import Maze from './Maze.jsx';
+import ScoreBox from './Score.jsx';
 import Leaderboard from './Leaderboard.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -26,7 +27,11 @@ const App = () => {
   const ghostIndex = useSelector((store) => store.game.ghostIndex);
   return (
     <div>
-      <Maze ghostIndex={ghostIndex} />
+      <div className='main-container'>
+        <Maze ghostIndex={ghostIndex} />
+        <ScoreBox />
+      </div>
+
       <Leaderboard />
       <button
         onClick={() => {

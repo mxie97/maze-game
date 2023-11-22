@@ -5,6 +5,25 @@ body {
   justify-content: center;
 }
 
+div {
+  text-align: center;
+  font-size: 40px;
+}
+
+.score-box {
+  margin-left: 20px;
+  font-size: x-large;
+}
+
+#userscore {
+  font-size: xx-large;
+}
+
+.main-container {
+  display: flex;
+  font-family: 'Courier New', Courier, monospace;
+}
+
 .maze-container {
   height: 680px;
   width: 680px;

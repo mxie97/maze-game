@@ -99,6 +99,11 @@ const initialState = {
   cherryIndex: 256,
   ghostIndex: 270,
   ghostDirection: 'left',
+  foodIndices: [
+    20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180,
+    190, 200, 210, 220, 230, 240, 250, 260,
+  ],
+  score: 0,
 };
 
 const gameSlice = createSlice({
@@ -113,6 +118,10 @@ const gameSlice = createSlice({
       state.maze = newMaze;
       state.cherryIndex = 256;
       state.ghostIndex = 270;
+      state.foodIndices = [
+        20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170,
+        180, 190, 200, 210, 220, 230, 240, 250, 260,
+      ];
     },
     CHANGE_DIRECTION_AND_MOVE: (state, action) => {
       console.log(action);
@@ -179,9 +188,20 @@ const gameSlice = createSlice({
         } else pickDirection = direction[Math.floor(Math.random() * 4)];
       }
     },
+    EAT_FOOD: (state, action) => {
+      const foodIndex = action.payload;
+      const foodIndicesCopy = [...state.foodIndices];
+      for (let i = 0; i < foodIndicesCopy.length; i++) {
+        if (foodIndicesCopy[i] === foodIndex) {
+          foodIndicesCopy[i] = 0;
+        }
+      }
+      state.foodIndices = foodIndicesCopy;
+      state.score += 100;
+    },
   },
 });
 
-export const { RESET_MAZE, CHANGE_DIRECTION_AND_MOVE, GHOST_ROAM } =
+export const { RESET_MAZE, CHANGE_DIRECTION_AND_MOVE, GHOST_ROAM, EAT_FOOD } =
   gameSlice.actions;
 export default gameSlice.reducer;
