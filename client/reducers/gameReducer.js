@@ -96,6 +96,7 @@ const initialState = {
   pacManIndex: 18,
   pacManDirection: 'ArrowRight',
   maze: getMazeState(),
+  cherryIndex: 256,
 };
 
 const gameSlice = createSlice({
@@ -104,7 +105,11 @@ const gameSlice = createSlice({
   reducers: {
     RESET_MAZE: (state, action) => {
       const newMaze = getMazeState();
+
+      state.pacManIndex = 18;
+      state.pacManDirection = 'ArrowRight';
       state.maze = newMaze;
+      state.cherryIndex = 256;
     },
     CHANGE_DIRECTION_AND_MOVE: (state, action) => {
       console.log(action);

@@ -3,14 +3,20 @@ import pacmanRight from '../images/pacman-right.gif';
 import pacmanDown from '../images/pacman-down.gif';
 import pacmanUp from '../images/pacman-up.gif';
 import pacmanLeft from '../images/pacman-left.gif';
+import cherry from '../images/cherry.png';
 import { useDispatch, useSelector } from 'react-redux';
+import { RESET_MAZE } from '../reducers/gameReducer.js';
 
 const Maze = () => {
   const maze = useSelector((store) => store.game.maze);
   const pacManIndex = useSelector((store) => store.game.pacManIndex);
   const pacManDirection = useSelector((store) => store.game.pacManDirection);
-  // console.log(pacManIndex);
-  console.log(pacManDirection);
+  const cherryIndex = useSelector((store) => store.game.cherryIndex);
+  const dispatch = useDispatch();
+  if (pacManIndex === cherryIndex) {
+    dispatch(RESET_MAZE());
+  }
+
   const cells = maze.map((color, index) => {
     if (index == pacManIndex) {
       if (pacManDirection === 'ArrowRight') {
@@ -54,6 +60,16 @@ const Maze = () => {
           </div>
         );
       }
+    } else if (index === cherryIndex) {
+      return (
+        <div
+          className={color}
+          key={index}
+          id={index}
+        >
+          <img src={cherry}></img>
+        </div>
+      );
     } else
       return (
         <div
