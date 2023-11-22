@@ -97,14 +97,14 @@ const initialState = {
   pacManDirection: 'ArrowRight',
   maze: getMazeState(),
   cherryIndex: 256,
-  ghostIndex: 270,
+  ghostIndex: 126,
   ghostDirection: 'left',
   foodIndices: [
     20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180,
     190, 200, 210, 220, 230, 240, 250, 260,
   ],
   score: 0,
-  highScores: { testuser: 1000 },
+  highScores: { 100: 'test' },
 };
 
 const gameSlice = createSlice({
@@ -118,7 +118,7 @@ const gameSlice = createSlice({
       state.pacManDirection = 'ArrowRight';
       state.maze = newMaze;
       state.cherryIndex = 256;
-      state.ghostIndex = 270;
+      state.ghostIndex = 126;
       state.foodIndices = [
         20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170,
         180, 190, 200, 210, 220, 230, 240, 250, 260,
@@ -204,6 +204,14 @@ const gameSlice = createSlice({
       document.getElementById('modal2').classList.add('active');
       document.getElementById('modal').classList.add('active');
       document.getElementById('overlay').classList.add('active');
+      state.pacManIndex = 18;
+    },
+    SAVE_SCORE: (state, action) => {
+      const username = action.payload[0];
+      const score = action.payload[1];
+      const highScoresSlice = { ...state.highScores };
+      highScoresSlice[score] = username;
+      state.highScores = highScoresSlice;
     },
   },
 });
@@ -214,5 +222,6 @@ export const {
   GHOST_ROAM,
   EAT_FOOD,
   END_GAME,
+  SAVE_SCORE,
 } = gameSlice.actions;
 export default gameSlice.reducer;

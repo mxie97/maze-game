@@ -12,7 +12,14 @@ const App = () => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     const handler = (e) => {
-      dispatch(CHANGE_DIRECTION_AND_MOVE(e.code));
+      if (
+        e.code === 'ArrowRight' ||
+        e.code === 'ArrowDown' ||
+        e.code === 'ArrowLeft' ||
+        e.code === 'ArrowUp'
+      ) {
+        dispatch(CHANGE_DIRECTION_AND_MOVE(e.code));
+      }
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);

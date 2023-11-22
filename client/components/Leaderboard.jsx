@@ -1,16 +1,22 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { SAVE_SCORE } from '../reducers/gameReducer.js';
 
 const Leaderboard = () => {
+  const userScore = useSelector((store) => store.game.score);
+
   const highScoresArray = useSelector((store) => store.game.highScores);
   let highScoresComponents = [];
-  for (let user in highScoresArray) {
-    highScoresComponents.push(
-      <p key={user}>
-        {user}: {highScoresArray[user]}
+
+  for (let score in highScoresArray) {
+    highScoresComponents.unshift(
+      <p key={score}>
+        {highScoresArray[score]}: {score}
       </p>
     );
   }
+  const dispatch = useDispatch();
+
   return (
     <div>
       <div
@@ -30,14 +36,22 @@ const Leaderboard = () => {
         id='modal'
       >
         <h4 id='endgame-message'>GAME OVER!</h4>
+        <p>Enter username:</p>
+        <input
+          type='text'
+          id='username'
+        ></input>
+        <p>Score: {userScore}</p>
         <button
           className='button'
           id='restart-button'
           onClick={() => {
             document.getElementById('modal').classList.remove('active');
+            let user = document.getElementById('username').value;
+            dispatch(SAVE_SCORE([user, userScore]));
           }}
         >
-          See High Scores
+          Save Score
         </button>
       </div>
     </div>

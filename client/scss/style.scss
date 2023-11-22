@@ -3,6 +3,7 @@ body {
   color: black;
   display: flex;
   justify-content: center;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 div {
@@ -21,7 +22,6 @@ div {
 
 .main-container {
   display: flex;
-  font-family: 'Courier New', Courier, monospace;
 }
 
 .maze-container {
@@ -57,11 +57,20 @@ img {
   left: 50%;
   top: 50%;
   position: fixed;
-  background-color: lavender;
+  background-color: greenyellow;
   font-size: 20px;
   transform: scale(0);
   transition: 200ms ease-in-out;
   border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    font-size: 20px;
+  }
 }
 
 .modal.active {
@@ -82,4 +91,29 @@ img {
 
 .overlay.active {
   display: flex;
+}
+
+#endgame-message {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 32px;
+  font-weight: bolder;
+}
+h4 {
+  font-size: 32px;
+  font-weight: bolder;
+}
+
+button {
+  background-color: greenyellow;
+  border: solid blue 4px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+input {
+  width: 200px;
 }
