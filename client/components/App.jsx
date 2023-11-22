@@ -1,5 +1,6 @@
 import React from 'react';
 import Maze from './Maze.jsx';
+import Leaderboard from './Leaderboard.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   CHANGE_DIRECTION_AND_MOVE,
@@ -26,7 +27,15 @@ const App = () => {
   return (
     <div>
       <Maze ghostIndex={ghostIndex} />
-      <button>click me</button>
+      <Leaderboard />
+      <button
+        onClick={() => {
+          document.getElementById('modal').classList.add('active');
+          document.getElementById('overlay').classList.add('active');
+        }}
+      >
+        click me
+      </button>
     </div>
   );
 };
