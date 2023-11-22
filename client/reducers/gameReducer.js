@@ -104,7 +104,7 @@ const initialState = {
     190, 200, 210, 220, 230, 240, 250, 260,
   ],
   score: 0,
-  highScores: { 100: 'test' },
+  highScores: { 100: 'bob', 200: 'hi' },
 };
 
 const gameSlice = createSlice({
@@ -125,7 +125,7 @@ const gameSlice = createSlice({
       ];
     },
     CHANGE_DIRECTION_AND_MOVE: (state, action) => {
-      console.log(action);
+      // console.log(action);
       state.pacManDirection = action.payload;
       if (
         action.payload === 'ArrowRight' &&

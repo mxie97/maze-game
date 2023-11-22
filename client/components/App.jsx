@@ -7,6 +7,7 @@ import {
   CHANGE_DIRECTION_AND_MOVE,
   GHOST_ROAM,
 } from '../reducers/gameReducer.js';
+// import startTheme from '../images/mixkit-arcade-game-opener-222.wav';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const App = () => {
   React.useEffect(() => {
     const ghostTimer = setTimeout(() => {
       dispatch(GHOST_ROAM());
-    }, 500);
+    }, 300);
     return () => clearTimeout(ghostTimer);
   });
 
