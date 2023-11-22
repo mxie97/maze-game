@@ -97,6 +97,7 @@ const initialState = {
   pacManDirection: 'ArrowRight',
   maze: getMazeState(),
   cherryIndex: 256,
+  ghostIndex: 270,
 };
 
 const gameSlice = createSlice({
@@ -110,6 +111,7 @@ const gameSlice = createSlice({
       state.pacManDirection = 'ArrowRight';
       state.maze = newMaze;
       state.cherryIndex = 256;
+      state.ghostIndex = 270;
     },
     CHANGE_DIRECTION_AND_MOVE: (state, action) => {
       console.log(action);
@@ -139,8 +141,12 @@ const gameSlice = createSlice({
         state.pacManIndex -= 17;
       }
     },
+    GHOST_ROAM: (state, action) => {
+      state.ghostIndex--;
+    },
   },
 });
 
-export const { RESET_MAZE, CHANGE_DIRECTION_AND_MOVE } = gameSlice.actions;
+export const { RESET_MAZE, CHANGE_DIRECTION_AND_MOVE, GHOST_ROAM } =
+  gameSlice.actions;
 export default gameSlice.reducer;
