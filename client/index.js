@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import App from './components/App.jsx';
 import store from './store.js';
 
-// uncomment so that webpack can bundle styles
 import styles from './scss/style.scss';
 
 // render(<App />, document.getElementById('root'));

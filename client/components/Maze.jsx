@@ -4,27 +4,21 @@ import pacmanDown from '../images/pacman-down.gif';
 import pacmanUp from '../images/pacman-up.gif';
 import pacmanLeft from '../images/pacman-left.gif';
 import cherry from '../images/cherry.png';
-import ghost from '../images/pac-man-ghost.gif';
+import Ghost from './Ghost.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { GHOST_ROAM, RESET_MAZE } from '../reducers/gameReducer.js';
 
-const Maze = () => {
+const Maze = (props) => {
   const maze = useSelector((store) => store.game.maze);
   const pacManIndex = useSelector((store) => store.game.pacManIndex);
   const pacManDirection = useSelector((store) => store.game.pacManDirection);
   const cherryIndex = useSelector((store) => store.game.cherryIndex);
-  const ghostIndex = useSelector((store) => store.game.ghostIndex);
+  const ghostIndex = props.ghostIndex;
 
   const dispatch = useDispatch();
   if (pacManIndex === cherryIndex) {
     dispatch(RESET_MAZE());
   }
-
-  React.useEffect(() => {
-    const ghostTimer = setTimeout(() => {
-      dispatch(GHOST_ROAM());
-    }, 500);
-  });
 
   const cells = maze.map((color, index) => {
     if (index == pacManIndex) {
@@ -86,7 +80,7 @@ const Maze = () => {
           key={index}
           id={index}
         >
-          <img src={ghost}></img>
+          <Ghost />
         </div>
       );
     } else

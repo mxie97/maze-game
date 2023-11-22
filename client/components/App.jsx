@@ -1,19 +1,30 @@
 import React from 'react';
 import Maze from './Maze.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { CHANGE_DIRECTION_AND_MOVE } from '../reducers/gameReducer.js';
+import {
+  CHANGE_DIRECTION_AND_MOVE,
+  GHOST_ROAM,
+} from '../reducers/gameReducer.js';
 
 const App = () => {
   const dispatch = useDispatch();
   React.useEffect(() => {
-    window.addEventListener('keydown', (e) => {
+    const handler = (e) => {
       dispatch(CHANGE_DIRECTION_AND_MOVE(e.code));
-    });
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  });
+  React.useEffect(() => {
+    const ghostTimer = setTimeout(() => {
+      dispatch(GHOST_ROAM());
+    }, 500);
   });
 
+  const ghostIndex = useSelector((store) => store.game.ghostIndex);
   return (
     <div>
-      <Maze />
+      <Maze ghostIndex={ghostIndex} />
       <button>click me</button>
     </div>
   );
