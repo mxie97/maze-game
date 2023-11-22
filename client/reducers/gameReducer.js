@@ -94,7 +94,7 @@ function getMazeState() {
 
 const initialState = {
   pacManIndex: 18,
-  pacManDirection: 'right',
+  pacManDirection: 'ArrowRight',
   maze: getMazeState(),
 };
 
@@ -106,8 +106,36 @@ const gameSlice = createSlice({
       const newMaze = getMazeState();
       state.maze = newMaze;
     },
+    CHANGE_DIRECTION_AND_MOVE: (state, action) => {
+      console.log(action);
+      state.pacManDirection = action.payload;
+      if (
+        action.payload === 'ArrowRight' &&
+        state.maze[state.pacManIndex + 1] === 'white'
+      ) {
+        state.pacManIndex++;
+      }
+      if (
+        action.payload === 'ArrowLeft' &&
+        state.maze[state.pacManIndex - 1] === 'white'
+      ) {
+        state.pacManIndex--;
+      }
+      if (
+        action.payload === 'ArrowDown' &&
+        state.maze[state.pacManIndex + 17] === 'white'
+      ) {
+        state.pacManIndex += 17;
+      }
+      if (
+        action.payload === 'ArrowUp' &&
+        state.maze[state.pacManIndex - 17] === 'white'
+      ) {
+        state.pacManIndex -= 17;
+      }
+    },
   },
 });
 
-export const { RESET_MAZE } = gameSlice.actions;
+export const { RESET_MAZE, CHANGE_DIRECTION_AND_MOVE } = gameSlice.actions;
 export default gameSlice.reducer;

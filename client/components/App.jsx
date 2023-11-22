@@ -1,12 +1,19 @@
 import React from 'react';
 import Maze from './Maze.jsx';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { CHANGE_DIRECTION_AND_MOVE } from '../reducers/gameReducer.js';
 
 const App = () => {
-  const maze = useSelector((store) => store.game.maze);
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    window.addEventListener('keydown', (e) => {
+      dispatch(CHANGE_DIRECTION_AND_MOVE(e.code));
+    });
+  });
+
   return (
     <div>
-      <Maze maze={maze} />
+      <Maze />
       <button>click me</button>
     </div>
   );
