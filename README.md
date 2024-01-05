@@ -1,1 +1,1 @@
-# maze-game
+# pacman-clone
